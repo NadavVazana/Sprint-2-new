@@ -7,6 +7,7 @@ var gImgDetails = createCurrImage()
 var gTouchEvs = ['touchstart', 'touchend', 'touchmove']
 var gIsMove = false
 var gStartPos
+var gLineMove
 
 function initCanvas() {
     
@@ -56,31 +57,69 @@ function addListeners() {
 
 function addMouseListeners(){
     gElCanvas.addEventListener('mousedown',onDown)
+    gElCanvas.addEventListener('mousemove',onMove)
+    gElCanvas.addEventListener('mouseup',onUp)
 }
-
-function onDown(ev){
+function onDown(ev) {
     var pos = getEvPos(ev)
-    isTextClicked(pos)
-    gIsMove = true
-    gStartPos = pos
+    if (isTextClicked(pos)) {
+        gLineMove = isTextClicked(pos)
+        console.log(gLineMove);
+        gIsMove = true
+        gStartPos = pos
+    }}
+function onMove(ev) {
+    if (!gIsMove) return
+    var pos = getEvPos(ev)
+    const dx = pos.x - gStartPos.x
+    const dy = pos.y - gStartPos.y
+    setCtxProperties()
+    gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
+    drawImg(gImgDetails.currImg)
+    setCtxProperties()
+    if(gLineMove === 1){
+    gCtx.fillText(gText.text1, gText.text1Pos.x + dx, gText.text1Pos.y + dy)
+    gCtx.strokeText(gText.text1, gText.text1Pos.x + dx, gText.text1Pos.y + dy)
+    if(gText.text2){
+    gCtx.fillText(gText.text2, gText.text2Pos.x , gText.text2Pos.y )
+    gCtx.strokeText(gText.text2, gText.text2Pos.x  ,gText.text2Pos.y )}
+}
+    else{
+        gCtx.fillText(gText.text2, gText.text2Pos.x + dx, gText.text2Pos.y + dy)
+        gCtx.strokeText(gText.text2, gText.text2Pos.x + dx, gText.text2Pos.y + dy)
+        if(gText.text1){
+        gCtx.fillText(gText.text1, gText.text1Pos.x , gText.text1Pos.y )
+        gCtx.strokeText(gText.text1, gText.text1Pos.x , gText.text1Pos.y )}
 
-    
+    }
+
 }
 
-function onMove(){
-    if(!gIsMove) return
+function onUp(ev) {
+    gIsMove = false
+    var pos = getEvPos(ev)
+    if(gLineMove === 1){
+    gText.text1Pos.x = pos.x - gText.text1Width / 2
+    gText.text1Pos.y = pos.y}
+    else{
+        gText.text2Pos.x = pos.x - gText.text2Width / 2
+    gText.text2Pos.y = pos.y
 
+    }
+    gStartPos = pos
 }
 
 function isTextClicked(pos) {
     
-    if(pos.x > gText.text1Pos.x && pos.x < gText.text1Width
-        && pos.y < gText.fontSize && pos.y > gText.text1Pos.x) console.log('sdasd');
+   
 
-    // else if (pos.x > gText.text2Pos.x && pos.x < gText.text1Width
-    //     && pos.y < gText.fontSize && pos.y > 20) return 2  
+        if (pos.x > gText.text1Pos.x && pos.x < gText.text1Width + gText.text1Pos.x
+            && pos.y < gText.fontSize + gText.text1Pos.y && pos.y > gText.text1Pos.y - gText.fontSize) return 1
+        if (pos.x > gText.text2Pos.x && pos.x < gText.text2Width + gText.text2Pos.x && pos.y < gText.fontSize + gText.text2Pos.y - 50 && pos.y > gText.text2Pos.y - 50) return 2
     
-}
+    }
+    
+
 
 function getEvPos(ev) {
     var pos = {
@@ -97,7 +136,7 @@ function getEvPos(ev) {
     }
     return pos
 }
-function createTextObject(text1 = '', text2 = '', fontSize = 50, currLine = 1, textColor = gTextColor, text1Width,text2Width,text1Pos,text2Pos) {
+function createTextObject(text1 = '', text2 = '', fontSize = 50, currLine = 1, textColor = gTextColor, text1Width,text2Width,text1Pos={x:20,y:50},text2Pos={x:20,y:250}) {
    return {
         text1,
         text2,
@@ -144,6 +183,7 @@ function drawImg(img) {
 
 
 
+
 function drawText(text) {
     if (gCtx.measureText(text).width >= gElCanvas.width - 25) {
         document.querySelector('.input-text').maxLength = text.length
@@ -160,16 +200,16 @@ function drawText(text) {
         drawImg(gImgDetails.currImg)
         setCtxProperties()
         gText.text1Width = gCtx.measureText(text).width
-        gCtx.fillText(`${text}`, 20, 50)
-        gCtx.strokeText(`${text}`, 20, 50)
-        gText.text1Pos = {x:20,y:50}
-        
+        gCtx.fillText(`${text}`, gText.text1Pos.x, gText.text1Pos.y)
+        gCtx.strokeText(`${text}`, gText.text1Pos.x, gText.text1Pos.y)
+        // gText.text1Pos = { x: 20, y: 50 }
+
 
 
 
         if (gText.text2) {
-            gCtx.fillText(`${gText.text2}`, 20, gImgDetails.imgHeight - 50)
-            gCtx.strokeText(`${gText.text2}`, 20, gImgDetails.imgHeight - 50)
+            gCtx.fillText(`${gText.text2}`, gText.text2Pos.x, gText.text2Pos.y)
+            gCtx.strokeText(`${gText.text2}`, gText.text2Pos.x, gText.text2Pos.y)
         }
 
         gText.text1 = text
@@ -182,13 +222,15 @@ function drawText(text) {
             gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height);
             drawImg(gImgDetails.currImg)
             setCtxProperties()
-            gCtx.fillText(`${text}`, 20, gImgDetails.imgHeight - 50)
-            gCtx.strokeText(`${text}`, 20, gImgDetails.imgHeight - 50)
+            gCtx.fillText(`${text}`, gText.text2Pos.x, gText.text2Pos.y)
+            gCtx.strokeText(`${text}`, gText.text2Pos.x, gText.text2Pos.y)
+            // gText.text2Pos = { x: 20, y: gImgDetails.imgHeight - 50 }
+            gText.text2Width = gCtx.measureText(text).width
 
 
             if (gText.text1) {
-                gCtx.fillText(`${gText.text1}`, 20, 50)
-                gCtx.strokeText(`${gText.text1}`, 20, 50)
+                gCtx.fillText(`${gText.text1}`, gText.text1Pos.x, gText.text1Pos.y)
+                gCtx.strokeText(`${gText.text1}`, gText.text1Pos.x, gText.text1Pos.y)
             }
 
             gText.text2 = text
@@ -196,7 +238,6 @@ function drawText(text) {
     }
 
 }
-
 
 function setCtxProperties() {
     gCtx.fillStyle = gText.textColor
