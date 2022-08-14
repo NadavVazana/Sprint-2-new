@@ -1,0 +1,531 @@
+/* IMPORTS */
+@import url(base.css);
+@import url(fonts.css);
+@import url(helpers.css);
+@import url(components.css);
+@import url(vars.css);
+@import url(responsive.css);
+@import url(normalize.css);
+
+/* Header */
+header {
+    direction: ltr;
+}
+
+.logo {
+    font-family: Poppins;
+    color: rgb(255, 255, 255);
+    flex-grow: 7;
+    user-select: none;
+
+}
+
+.logo:hover {
+    cursor: pointer;
+}
+
+
+nav>* {
+    padding: 0.7rem;
+    border: none;
+    background-color: rgba(255, 247, 247, 0);
+    font-size: 1.3125rem;
+    color: var(--clr4);
+    transition: all 0.4s;
+
+
+
+
+
+}
+
+nav>*:hover {
+    box-shadow: 7px 6px 19px 2px #18171736;
+    background-color: rgba(255, 247, 247, 1);
+    color: #21ac91;
+    ;
+    transition: all 0.4s;
+    cursor: pointer;
+
+}
+
+
+
+/* Search Section */
+
+.select-lang {
+    border: black solid 2px;
+    border-radius: 20px;
+    background-color: #0c65f3;
+    text-align: center;
+    color: white;
+    width: 50%;
+    height: 40px;
+    min-height: 40px;
+    margin-bottom: 20px;
+    font-size: 1em;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+.select-lang:hover {
+
+    color: black;
+    background-color: #21ac91;
+    background-image: var(--linearClr);
+}
+
+.clear-gallery {
+    width: 50%;
+    height: 43px;
+    font-size: 1rem;
+    background-color: #0c65f3;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.clear-gallery:hover {
+    background-color: #21ac91;
+
+}
+
+.user-gallery {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 50%;
+    height: 43px;
+    max-height: 43px;
+    font-size: 1rem;
+    background-color: #0c65f3;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+.user-gallery:hover {
+    background-color: #21ac91;
+    background-image: var(--linearClr);
+}
+
+.no-saved{
+    color: white;
+    font-size: 3rem;
+}
+
+.rnd-meme {
+    font-family: Rubik;
+
+    direction: ltr;
+    font-size: 30px;
+    background-color: #0c65f3;
+    background-image: var(--linearClr);
+    transition: all 0.5s;
+    margin-bottom: 20px;
+}
+
+.rnd-meme:hover {
+    padding: 5px;
+    transition: all 0.5s;
+}
+
+.input-search {
+    direction: ltr;
+    color: var(--clr4);
+
+
+    padding: 10px;
+    padding-inline-start: 10px;
+    padding-inline-end: 20px;
+    border-radius: 20px;
+    background-color: var(--clr2);
+    width: 100%;
+}
+
+.search-div {
+    position: relative;
+
+}
+
+.search-icon {
+    width: 1rem;
+    position: absolute;
+    right: 9px;
+    top: 8px;
+}
+
+.search-container>.keywords {
+    font-size: 1rem;
+
+    color: var(--clr4);
+}
+
+.keywords {
+    direction: ltr;
+    margin-top: 10px;
+}
+
+.keywords>* {
+    margin: 3%;
+    user-select: none;
+
+}
+
+
+.keywords>*:hover {
+
+    color: var(--clr1);
+    cursor: pointer;
+}
+
+.keywords :first-child {
+    font-size: 2rem;
+}
+
+.keywords :last-child {
+    font-size: 1.3rem;
+}
+
+
+
+/* Gallery body */
+
+.gal-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+
+
+}
+
+
+
+.gal-item {
+    position: relative;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    border-radius: 30px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    color: rgba(255, 255, 255, 0);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    font-family: Rubik;
+    user-select: none;
+    transition: all 0.4s;
+}
+
+.details:hover {
+    background-color: rgba(0, 0, 0, 0.596);
+    color: rgb(255, 255, 255);
+    transition: all 0.4s;
+}
+
+
+
+/* Modal and Canvas */
+
+.saved-modal {
+    opacity: 0;
+    text-align: center;
+    background-color: #0c65f3;
+    background-image: var(--linearClr);
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    width: 50%;
+    height: 30%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    transition: all 0.4s;
+    pointer-events: none;
+}
+
+.open-saved-modal {
+    pointer-events: all;
+    opacity: 1;
+    transition: all 0.4s;
+}
+
+.file-button {
+    background-color: #0c65f3;
+    grid-area: file;
+    color: black;
+}
+
+.save-img {
+    background-color: #0c65f3;
+    color: white;
+    padding: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    grid-area: save;
+    margin-inline-start: 10px;
+}
+
+.canvas-container {
+
+    min-width: 50%;
+
+
+
+}
+
+.canvas {
+    width: 100%;
+    display: block;
+    margin: auto;
+
+}
+
+.actions {
+    /* margin-inline-end: 1px; */
+    flex-grow: 1;
+    background-color: var(--clr3);
+    justify-items: center;
+    align-items: center;
+    min-height: 50%;
+
+    grid-template-rows: 1fr 1fr 2fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    /* align-self: center; */
+
+    grid-template-areas:
+        'input input input input input '
+        'file addLine delete switch . '
+        ' save  big  mid low color  '
+        'share share close download download ';
+    column-gap: 15px;
+
+
+
+
+
+}
+
+.color-picker {
+    grid-area: color;
+
+
+}
+
+.file-input {
+    position: relative;
+    bottom: 30px;
+    grid-area: file;
+    opacity: 0;
+    height: 40px;
+    width: 40px;
+}
+
+.file-button {
+    font-weight: bold;
+    height: 40px;
+    width: 40px;
+    margin-inline-start: 15px;
+    font-size: 20px;
+}
+
+.file-button>span {
+    position: relative;
+    top: 5px;
+    right: 7px;
+}
+
+.actions>button:hover {
+    background-color: var(--clr5);
+    color: white;
+}
+
+.actions>button {
+    border: none;
+
+
+}
+
+.input-text {
+    grid-area: input;
+    font-size: 2rem;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.switch-lines {
+    background-color: #597cb4;
+    grid-area: switch;
+    padding: 15px;
+    width: 100%;
+
+}
+
+.add-line {
+    background-color: #21ac91;
+    grid-area: addLine;
+    padding: 15px;
+    width: 100%;
+}
+
+.delete-line {
+    background-color: rgb(245, 63, 63);
+    grid-area: delete;
+    padding: 15px;
+    width: 100%;
+}
+
+.download {
+    color: black;
+    text-decoration: none;
+    width: 100%;
+    padding: 20px;
+    background-color: aqua;
+    font-size: 1em;
+
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    grid-area: download;
+}
+
+.download>a {
+    position: relative;
+    right: 14px;
+}
+
+.download:hover {
+    color: green;
+}
+
+.close-modal {
+    font-family: 'Times New Roman', Times, serif;
+    grid-area: close;
+    padding: 15px;
+    background-color: lightcoral;
+    font-size: 1.5em;
+    width: 100%;
+    color: black;
+
+}
+
+.open-modal {
+    opacity: 1;
+    pointer-events: all;
+    transition: opacity 0.4s;
+}
+
+.big-font {
+    grid-area: big;
+    width: 100%;
+    height: 40%;
+    font-size: 2em;
+    background-color: rgb(124, 187, 53);
+    color: black;
+}
+
+.mid-font {
+    color: black;
+    grid-area: mid;
+    width: 100%;
+    height: 40%;
+    background-color: rgb(19, 81, 139);
+    font-size: 1.5em;
+}
+
+.low-font {
+    color: black;
+    grid-area: low;
+    width: 100%;
+    height: 40%;
+    background-color: saddlebrown;
+    font-size: 1em;
+}
+
+/* Share and Upload */
+.facebook-gif {
+    width: 10%;
+}
+
+.user-msg {
+    font-size: 1rem;
+}
+
+.user-msg::selection {
+    background-color: #0c65f3;
+
+}
+
+
+
+.share-container>* {
+    text-decoration: none;
+    color: rgb(35, 56, 148);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 50px;
+
+}
+
+.close-share {
+    position: absolute;
+    left: 93%;
+}
+
+.close-share:hover {
+    background-color: var(--clr5);
+    color: white;
+}
+
+.share-container>*:hover {
+    color: #0c65f3;
+    cursor: pointer;
+}
+
+
+.open-share {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.share {
+    width: 100%;
+    padding: 20px;
+    grid-area: share;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 1.2em;
+    color: black;
+    background-color: #597cb4;
+}
+
+
+
+
+/* ABOUT */
+
+.about-title {
+
+    width: 100%;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 50px;
+    text-align: center;
+    color: var(--clr5);
+    background-image: var(--linearClr);
+}
+
+
+.about-img {
+    width: 70%;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.about-button {
+    font-size: 20px;
+    position: relative;
+    padding: 20px;
+    font-weight: bold;
+}
+
+.about-button:hover {
+    background-color: #0c65f3;
+    color: white;
+}

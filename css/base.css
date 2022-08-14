@@ -1,0 +1,51 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: Poppins;
+}
+
+body {
+    background-color: var(--clr2);
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+
+
+}
+
+.page-container {
+    height: 100%;
+    width: 100%;
+    margin: 0 auto 0;
+
+}
+
+::selection {
+    background-color: var(--clr1);
+
+}
+
+button {
+    font-family: Poppins;
+    border-radius: 20px;
+
+}
+
+select {
+    height: 30px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.main-layout {
+    max-width: 350px;
+
+
+}
+
+
+img {
+    object-fit: cover;
+}

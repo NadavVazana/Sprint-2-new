@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="imgs/icon-tab.png">
+    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme Generator</title>
+</head>
+
+<body onload="init()">
+    <section class="page-container main-layout flex-col ">
+        <header class="main-header flex space-between ">
+            <h2 onclick="initGallery()" class="logo">MEME GENERATOR</h2>
+            <nav class="main-nav flex">
+                <button data-trans="about" onclick="window.location= 'about.html'" class="about-view">About</button>
+            </nav>
+        </header>
+
+        <main class="gallery flex-col">
+            <section class="search-container flex-col ">
+                <div class="search-div"><i><img class="search-icon" src="imgs/search-icon.png"
+                            alt="search-icon"></i><input data-trans="search" oninput="onFilterByKeyword(this.value)"
+                        class="input-search" placeholder="Search by keywords" type="text"></div>
+                <div class="keywords flesx"><span
+                        onclick="onFilterByKeyword(this.innerText);onKeywordPress(this.innerText)">Funny</span><span
+                        onclick="onFilterByKeyword(this.innerText);onKeywordPress(this.innerText)">Angry</span><span
+                        onclick="onFilterByKeyword(this.innerText);onKeywordPress(this.innerText)">Happy</span></div>
+                <button class="user-gallery" onclick="renderUserGallery()">To my gallery</button>
+                <button hidden class="clear-gallery" onclick="clearUserGallery()">Clear my Gallery</button>
+                <select class="select-lang" onchange="onTranslate(this.value)">
+                    <option value="select">Select Language</option>
+                    <option value="en">English</option>
+                    <option value="he">עברית</option>
+                </select>
+                <button data-trans="flexible" class="rnd-meme" onclick="randomImg()">I'm flexible!</button>
+            </section>
+
+            <section class="gallery-body grid">
+
+            </section>
+
+
+
+        </main>
+
+        <section class="modal flex-col">
+            <div class="canvas-container">
+                <canvas class="canvas"></canvas>
+
+            </div>
+
+
+
+            <div class="actions grid">
+                <button class="file-button"><span>⇑</span> <input type="file" class="file-input" name="image"
+                        onchange="onImgInput(event)" /></button>
+                <input data-trans="text" oninput="drawText(this.value,event)" class="input-text"
+                    placeholder="input text here" type="text">
+                <button onclick="onAddLine()" class="add-line"><i><img src="imgs/action-icons/+.png"
+                            alt=""></i></button>
+                <button onclick="resetInputs();drawText('')" class="delete-line"><i><img
+                            src="imgs/action-icons/delete.png" alt=""></i></button>
+                <button onclick="switchLines()" class="switch-lines"><i><img src="imgs/action-icons/up.png"
+                            alt=""></i><i><img src="imgs/action-icons/down.png" alt=""></i></button>
+                <button onclick="onChangeFontSize(60)" class="big-font">A++</button>
+                <button onclick="onChangeFontSize(50)" class="mid-font">A+</button>
+                <button onclick="onChangeFontSize(40)" class="low-font">A</button>
+                <button onclick="uploadImg()" class="share">Share</button>
+                <button class="download"> <a onclick="downloadCanvas(this)" download="My-Meme">Download</a></button>
+                <button onclick="closeModal()" class="close-modal">Close</button>
+                <button class="save-img" onclick="saveImage()">Save</button>
+                <input class="color-picker" oninput="changeTextColor(this.value)" type="color">
+
+
+            </div>
+
+        </section>
+
+        <div class="saved-modal flex-col space-between">
+            <p>Saved!</p>
+            <img src="imgs/dance.gif" alt="">
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </section>
+    <div class="share-section flex-col">
+        <div class="share-container"></div>
+        <img class="facebook-gif" src="imgs/facebook.gif" alt="">
+        <h2 class="user-msg"></h2>
+        <button onclick="closeShare()" class="close-share">X</button>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/i18n.-service.js"></script>
+    <script src="js/storage-service.js"></script>
+    <script src="js/upload-service.js"></script>
+    <script src="js/canvas-service.js"></script>
+    <script src="js/gallery-controller.js"></script>
+    <script src="js/main-controller.js"></script>
+</body>
+
+</html>
