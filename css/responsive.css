@@ -96,7 +96,7 @@
     }
 
     .modal {
-        top: 20%;
+        top: 0
 
     }
 
@@ -119,7 +119,7 @@
     .saved-modal {
         height: 100%;
     }
-
+   
 
 
 

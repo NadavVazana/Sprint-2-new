@@ -73,12 +73,13 @@ function onMove(){
 }
 
 function isTextClicked(pos) {
+    
+    if(pos.x > gText.text1Pos.x && pos.x < gText.text1Width
+        && pos.y < gText.fontSize && pos.y > gText.text1Pos.x) console.log('sdasd');
 
-    if (pos.x > gText.text1Pos.x && pos.x < gText.text1Width && pos.y < gText.text1Pos.y && pos.y > 50 - gText.fontSize)
-        console.log('text1');
-    // else if (pos.x > 20 && pos.x < gText.text2Width && pos.y < gImgDetails.imgHeight && pos.y > gImgDetails.imgHeight - 50 - gText.fontSize)
-    //     console.log('text2');
-        else console.log('no');
+    // else if (pos.x > gText.text2Pos.x && pos.x < gText.text1Width
+    //     && pos.y < gText.fontSize && pos.y > 20) return 2  
+    
 }
 
 function getEvPos(ev) {
@@ -97,7 +98,7 @@ function getEvPos(ev) {
     return pos
 }
 function createTextObject(text1 = '', text2 = '', fontSize = 50, currLine = 1, textColor = gTextColor, text1Width,text2Width,text1Pos,text2Pos) {
-    var text = {
+   return {
         text1,
         text2,
         fontSize,
@@ -109,17 +110,17 @@ function createTextObject(text1 = '', text2 = '', fontSize = 50, currLine = 1, t
         text2Pos
 
     }
-    return text
+    
 }
 
 function createCurrImage(imgHeight, currImg) {
-    var img = {
+    return {
         imgHeight,
         currImg,
 
 
     }
-    return img
+   
 }
 
 function drawImg(img) {
@@ -158,6 +159,7 @@ function drawText(text) {
         gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height);
         drawImg(gImgDetails.currImg)
         setCtxProperties()
+        gText.text1Width = gCtx.measureText(text).width
         gCtx.fillText(`${text}`, 20, 50)
         gCtx.strokeText(`${text}`, 20, 50)
         gText.text1Pos = {x:20,y:50}
@@ -203,6 +205,10 @@ function setCtxProperties() {
 }
 
 function addLine() {
+    if(gText.currLine === 2){
+        gElInput.focus()
+        return
+    } 
     gText.currLine = 2
     gElInput.value = ''
     gElInput.focus()
