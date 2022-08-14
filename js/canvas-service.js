@@ -2,8 +2,8 @@ var gElCanvas
 var gCtx
 const gElInput = document.querySelector('.input-text')
 var gTextColor = '#FFFFFF'
-var gText = createTextObject()
 var gImgDetails = createCurrImage()
+var gText = createTextObject()
 var gTouchEvs = ['touchstart', 'touchend', 'touchmove']
 var gIsMove = false
 var gStartPos
@@ -102,7 +102,7 @@ function onUp(ev) {
     gText.text1Pos.x = pos.x - gText.text1Width / 2
     gText.text1Pos.y = pos.y}
     else{
-        gText.text2Pos.x = pos.x - gText.text2Width / 2
+    gText.text2Pos.x = pos.x - gText.text2Width / 2
     gText.text2Pos.y = pos.y
 
     }
@@ -136,7 +136,7 @@ function getEvPos(ev) {
     }
     return pos
 }
-function createTextObject(text1 = '', text2 = '', fontSize = 50, currLine = 1, textColor = gTextColor, text1Width,text2Width,text1Pos={x:20,y:50},text2Pos={x:20,y:250}) {
+function createTextObject(text1 = '', text2 = '', fontSize = 50, currLine = 1, textColor = gTextColor, text1Width,text2Width,text1Pos={x:20,y:50},text2Pos={x:20,y:100 }) {
    return {
         text1,
         text2,
@@ -208,8 +208,8 @@ function drawText(text) {
 
 
         if (gText.text2) {
-            gCtx.fillText(`${gText.text2}`, gText.text2Pos.x, gText.text2Pos.y)
-            gCtx.strokeText(`${gText.text2}`, gText.text2Pos.x, gText.text2Pos.y)
+            gCtx.fillText(`${gText.text2}`, gText.text2Pos.x, gImgDetails.imgHeight - 50)
+            gCtx.strokeText(`${gText.text2}`, gText.text2Pos.x, gImgDetails.imgHeight - 50)
         }
 
         gText.text1 = text
@@ -222,9 +222,9 @@ function drawText(text) {
             gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height);
             drawImg(gImgDetails.currImg)
             setCtxProperties()
-            gCtx.fillText(`${text}`, gText.text2Pos.x, gText.text2Pos.y)
-            gCtx.strokeText(`${text}`, gText.text2Pos.x, gText.text2Pos.y)
-            // gText.text2Pos = { x: 20, y: gImgDetails.imgHeight - 50 }
+            gCtx.fillText(`${text}`, gText.text2Pos.x, gImgDetails.imgHeight - 50)
+            gCtx.strokeText(`${text}`, gText.text2Pos.x, gImgDetails.imgHeight - 50)
+            gText.text2Pos = { x: 20, y: gImgDetails.imgHeight - 50 }
             gText.text2Width = gCtx.measureText(text).width
 
 
@@ -290,6 +290,8 @@ function drawDefaultText() {
 
 
 function resetInputs() {
+    gText.text1Pos = {x: 20,y:50}
+    gText.text2Pos = {x:20,y:100}
     gText.text1 = ''
     gText.text2 = ''
     gElInput.value = ''
