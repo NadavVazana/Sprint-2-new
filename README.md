@@ -56,7 +56,7 @@ In the homepage, the user can choose a meme and create it, filter the memes and 
 
 When the user selects a meme, a modal is opening and let the user make the actions on the meme such as adding text, changing font size and colors.
 
-<img src="https://res.cloudinary.com/ds8xkm0ue/image/upload/v1667123752/Untitled1_arnbl1.png" / >
+<img src="https://res.cloudinary.com/ds8xkm0ue/image/upload/v1667123752/Untitled1_arnbl1.png" />
 
 ## <a id="authors" /> Authors
 
